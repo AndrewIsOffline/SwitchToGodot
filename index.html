@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Switching to Godot</title>
+		<style>
+			body {
+				color: #FFFFFF
+			}
+			
+			h1 {
+				text-align: center
+			}
+			table, th, td {
+				border: 1px solid gray;
+			}
+		</style>
+	</head>
+	
+	<body bgcolor=#202326>
+		<h1>Don't wait for Godot, switch today!</h1>
+		<p>This page is meant for people who are ditching Unity after their recent fees, but are finding the transition to Godot to be daunting. This page lays out the big differences between the two engines in a way that is meant to give former Unity developers a head start into the Godot environment.</p>
+		<h3>Interface</h3>
+		<table>
+			<tr>
+				<th></th>
+				<th>Unity</th>
+				<th>Godot</th>
+			</tr>
+			<tr>
+				<td>Layout</td>
+				<td>Unity has a window-based, customizable layout, with the main game window sitting in the middle and various movable windows sitting to the sides and below.</td>
+				<td>Godot has a similar layout, though with a slightly different default layout. Do note that the "run" button is off to the side, with the main window "mode" sitting in the middle.</td>
+			</tr>
+			<tr>
+				<td>Running</td>
+				<td>Clicking the "run" button starts the current scene. The scene runs in the game window and the side windows are updated as in-game events happen.</td>
+				<td>Clicking the "run" button builds the game and starts the current scene. The scene runs in a separate window, and side windows are updated as in-game events happen, though going to the "scene" window and selecting "local" will let you view how the scene originally was.</td>
+			</tr>
+			<tr>
+				<td>Updating files</td>
+				<td>After updating files externally, clicking on the Unity window will load files and compile scripts. Any script errors will be shown now.</td>
+				<td>After updating files externally, clicking on the Godot window will load files. Scripts are compiled when the game is run.</td>
+			</tr>
+		</table>
+		<h3>Structure</h3>
+		<table>
+			<tr>
+				<th></th>
+				<th>Unity</th>
+				<th>Godot</th>
+			</tr>
+			<tr>
+				<td>Gameplay Elements</td>
+				<td>Unity has "GameObjects", which by themselves only contain coordinates and gain behaviors through "Components", which perform various actions like drawing meshes or constraining physics bodies.</td>
+				<td>Godot has "Nodes", which each perform a single action like drawing meshes or constraining physics objects. This makes for a messier heirarchy, but since each node has its own transform, more versatility is allowed in object placement. Scripts, however, are attached to nodes.</td>
+			</tr>
+			<tr>
+				<td>Levels and Prefabs</td>
+				<td>Unity has "Levels", which contain game objects as well as environment settings and are meant to replace each other as separate "levels" of a game. Unity also has "prefabs", which also contain game objects and are meant to be loaded as pieces of a game, like obstacles or pickups.</td>
+				<td>Godot has "Scenes", which contain game objects. Besides including environment data, nothing separates levels from prefabs.</td>
+			</tr>
+		</table>
+		<h3>Coding</h3>
+		<table>
+			<tr>
+				<th></th>
+				<th>Unity</th>
+				<th>Godot</th>
+			</tr>
+			<tr>
+				<td>Languages</td>
+				<td>Unity supports C#.</td>
+				<td>Godot supports C#, C++, and GDscript, a language created specifically for the engine. Within the documentation, GDScript has the most support, but C# is a close second. Do note that Godot has a separate version for C# support, though it is cross-compatable with the main version. Also note that while C# has most of the same features that GDscript does, they are written differently: GDscript uses snake_case, while C# uses PascalCase.</td>
+			</tr>
+			<tr>
+				<td>Shading Languages</td>
+				<td>Unity uses HLSL. It also has "ShaderLab", a node-based wrapper for shaders.</td>
+				<td>Godot uses a GLSL-like language.</td>
+			</tr>
+			<tr>
+				<td>IDE</td>
+				<td>Unity relies on external IDEs</td>
+				<td>Godot has an internal IDE, accessable through the "script" button at the top of the editor, though external IDEs also work.</td>
+			</tr>
+		</table>
+		<h3>C#</h3>
+		<p>Note that both engines can use a lot of default C# libraries, like "Mathf". There's a good overview of Godot C# code <a href="https://docs.godotengine.org/en/stable/tutorials/scripting/c_sharp/c_sharp_differences.html">here</a>.</p>
+		<table>
+			<tr>
+				<th></th>
+				<th>Unity</th>
+				<th>Godot</th>
+			</tr>
+			<tr>
+				<td>Debug Print</td>
+				<td>Log.Print(var)</td>
+				<td>GD.Print(var)</td>
+			</tr>
+			<tr>
+				<td>Debug Assert</td>
+				<td>Debug.Assert(bool)</td>
+				<td>System.Diagnostics.Debug.Assert(bool)</td>
+			</tr>
+			<tr>
+				<td>Get attached object</td>
+				<td>GameObject gameObject</td>
+				<td>Node3D this (attached scripts are children of Node3D)</td>
+			</tr>
+		</table>
+	</body>
+</html>
