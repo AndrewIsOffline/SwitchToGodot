@@ -30,7 +30,7 @@
 			<tr>
 				<td>Layout</td>
 				<td>Unity has a window-based, customizable layout, with the main game window sitting in the middle and various movable windows sitting to the sides and below.</td>
-				<td>Godot has a similar layout, though with a slightly different default layout. Do note that the "run" button is off to the side, with the main window "mode" sitting in the middle.</td>
+				<td>Godot has a similar, window-based, customizable layout, though with slightly different defaults. Do note that the "run" button is off to the side, with the main window "mode" sitting in the middle.</td>
 			</tr>
 			<tr>
 				<td>Running</td>
@@ -41,6 +41,16 @@
 				<td>Updating files</td>
 				<td>After updating files externally, clicking on the Unity window will load files and compile scripts. Any script errors will be shown now.</td>
 				<td>After updating files externally, clicking on the Godot window will load files. Scripts are compiled when the game is run.</td>
+			</tr>
+			<tr>
+				<td>Runtime window features</td>
+				<td>Unity can be switched back to the editor window during runtime and navigate the scene while it is running.</td>
+				<td>Godot can add debugging effects that are visible during runtime, like highlighting collision points, through the "Debug" menu.</td>
+			</tr>
+			<tr>
+				<td>UI Elements</td>
+				<td>UI elements must be attached to a canvas object, and appear within the editor.</td>
+				<td>UI elements are freestanding, and appear in the 2D editor, even in 3D games.</td>
 			</tr>
 		</table>
 		<h3>Structure</h3>
@@ -58,7 +68,22 @@
 			<tr>
 				<td>Levels and Prefabs</td>
 				<td>Unity has "Levels", which contain game objects as well as environment settings and are meant to replace each other as separate "levels" of a game. Unity also has "prefabs", which also contain game objects and are meant to be loaded as pieces of a game, like obstacles or pickups.</td>
-				<td>Godot has "Scenes", which contain game objects. Besides including environment data, nothing separates levels from prefabs.</td>
+				<td>Godot has "Scenes", which contain game objects. Besides including a node for environment data, nothing separates levels from prefabs.</td>
+			</tr>
+			<tr>
+				<td>Meshes as colliders</td>
+				<td>Meshes can be used as colliders.</td>
+				<td>Meshes must be converted to colliders. This is easily done by creating a MeshInstance3D, opening the "Mesh" menu (above the main window), and selecting one of the "Create Collision Sibling" options.</td>
+			</tr>
+			<tr>
+				<td>Object labeling</td>
+				<td>Unity uses "tags", which act as an attribute of an object. Each object can only have one tag at a time.</td>
+				<td>Godot uses "groups", which act as collections of objects. Each object can belong to multiple groups.</td>
+			</tr>
+			<tr>
+				<td>Collision Masking</td>
+				<td>Objects can be in one of 32 layers. A boolean matrix dictates which layers interact with each other.</td>
+				<td>Each object has a bitfield representing the layers that it is a part of and a mask representing the layers that it collides with.</td>
 			</tr>
 		</table>
 		<h3>Coding</h3>
@@ -81,7 +106,12 @@
 			<tr>
 				<td>IDE</td>
 				<td>Unity relies on external IDEs</td>
-				<td>Godot has an internal IDE, accessable through the "script" button at the top of the editor, though external IDEs also work.</td>
+				<td>Godot has an internal IDE, accessable through the "script" button at the top of the editor, though external IDEs also work. The IDE has some integration features with the rest of Godot. For example, dragging an object from the Scene or FileSystem windows into the code inserts the object's location.</td>
+			</tr>
+			<tr>
+				<td>Setting variables in-editor</td>
+				<td>Declaring a variable as public in a script adds a setting to the Unity editor to set an intial value.</td>
+				<td>Adding a metadata value in the Godot editor adds it to a map that can be accessed in scripts through <a href="https://docs.godotengine.org/en/stable/classes/class_object.html#class-object-method-get-meta">GetMeta</a>.</td>
 			</tr>
 		</table>
 		<h3>C#</h3>
@@ -91,10 +121,11 @@
 				<th></th>
 				<th>Unity</th>
 				<th>Godot</th>
+				<th>Notes</th>
 			</tr>
 			<tr>
 				<td>Debug Print</td>
-				<td>Log.Print(var)</td>
+				<td>Debug.Log(var)</td>
 				<td>GD.Print(var)</td>
 			</tr>
 			<tr>
@@ -103,9 +134,27 @@
 				<td>System.Diagnostics.Debug.Assert(bool)</td>
 			</tr>
 			<tr>
-				<td>Get attached object</td>
+				<td>Get Attached Object</td>
 				<td>GameObject gameObject</td>
-				<td>Node3D this (attached scripts are children of Node3D)</td>
+				<td>Node this</td>
+				<td>For Godot, scripts are children of their attached object's class</td>
+			</tr>
+			<tr>
+				<td>Attach an Object</td>
+				<td>object.transform.parent = root.transform</td>
+				<td>root.AddChild(object)</td>
+				<td>Godot requires that objects are parented to other objects in the scene</td>
+			</tr>
+			<tr>
+				<td>Setting Label</td>
+				<td>object.tag = String</td>
+				<td>object.AddToGroup(String), object.RemoveFromGroup(String)</td>
+				<td rowspan=2>Godot nodes can belong to multiple groups at the same time</td>
+			</tr>
+			<tr>
+				<td>Reading Label</td>
+				<td>object.tag</td>
+				<td>object.GetGroups(), object.IsInGroup(String)</td>
 			</tr>
 		</table>
 	</body>
